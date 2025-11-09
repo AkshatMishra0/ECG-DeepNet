@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ECG Report</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; color: #111; }
+    h1 { font-size: 20px; margin-bottom: 4px; }
+    h2 { font-size: 16px; margin: 12px 0 6px; }
+    .muted { color: #666; }
+    .section { margin-bottom: 10px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #ccc; padding: 6px; font-size: 12px; }
+    th { background: #f2f2f2; text-align: left; }
+    .small { font-size: 11px; }
+  </style>
+</head>
+<body>
+  <h1>ECG AI Clinical Report</h1>
+  <div class="muted small">Generated at: {{ generated_at }}</div>
+  <div class="section">
+    <h2>Study Details</h2>
+    <div class="small">File: {{ filename }}</div>
+    {% if freq_name %}<div class="small">Scanned Frequency: {{ freq_name }}</div>{% endif %}
+  </div>
+  <div class="section">
+    <h2>Patient Information</h2>
+    <div class="small">Name: {{ name or '-' }}</div>
+    <div class="small">Age: {{ age or '-' }}</div>
+    <div class="small">Sex: {{ sex or '-' }}</div>
+    <div class="small">Patient ID: {{ patient_id or '-' }}</div>
+    <div class="small">Notes: {{ notes or '-' }}</div>
+  </div>
+  <div class="section">
+    <h2>AI Summary</h2>
+    <div class="small">{{ ai_report or 'Not available.' }}</div>
+  </div>
+  <div class="section">
+    <h2>Top Predictions</h2>
+    <ol class="small">
+      {% for short, long, conf in top3 %}
+      <li><strong>{{ long }}</strong> ({{ short }}) — {{ '%.1f'|format(conf * 100) }}%</li>
+      {% endfor %}
+    </ol>
+  </div>
+  <div class="section">
+    <h2>All Class Probabilities</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Short Code</th>
+          <th>Full Diagnosis</th>
+          <th>Confidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for short, long, conf in preds %}
+        <tr>
+          <td>{{ short }}</td>
+          <td>{{ long }}</td>
+          <td>{{ '%.1f'|format(conf * 100) }}%</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
+

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECG Model Web Inference</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script>
+    // JS: disables manual file fields if dropdown pick made
+    function updateFileFields() {
+      var sel100 = document.getElementById('record100').value;
+      var sel500 = document.getElementById('record500').value;
+      var manualFields = document.querySelectorAll('.manual-file');
+      var disable = !!(sel100 || sel500);
+      manualFields.forEach(f => f.disabled = disable);
+    }
+  </script>
+</head>
+<body class="bg-light">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow">
+          <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">ECG AI Model Prediction</h3>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-info">
+              <b>Choose a patient record from below to auto-load (best for PTB-XL datasets),<br>or upload files manually if not listed.</b>
+            </div>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div class="alert alert-warning">
+                  {{ messages[0] }}
+                </div>
+              {% endif %}
+            {% endwith %}
+            <form method="post" enctype="multipart/form-data" action="{{ url_for('predict') }}">
+              <div class="mb-3">
+                <label for="model_name" class="form-label">Choose a Trained Model:</label>
+                <select class="form-select" name="model_name" id="model_name" required>
+                  {% for m in models %}
+                  <option value="{{ m }}">{{ m }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="mb-3 border rounded p-3">
+                <label class="form-label fw-bold mb-2">Select Preloaded Record</label>
+                <div class="mb-2">
+                  <label for="record100">100 Hz records:</label>
+                  <select class="form-select mb-1" name="record100" id="record100" onchange="updateFileFields()">
+                    <option value="">-- None --</option>
+                    {% for r in records100 %}
+                    <option value="{{ r }}">{{ r }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="mb-2">
+                  <label for="record500">500 Hz records:</label>
+                  <select class="form-select" name="record500" id="record500" onchange="updateFileFields()">
+                    <option value="">-- None --</option>
+                    {% for r in records500 %}
+                    <option value="{{ r }}">{{ r }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="alert alert-secondary mt-2 mb-2 p-2">
+                Or <strong>upload both files manually</strong> for new/external ECGs:
+              </div>
+              <div class="mb-3 border rounded p-3">
+                <label class="form-label fw-bold mb-2">100 Hz Recordings</label>
+                <div class="row g-2 align-items-center mb-2">
+                  <div class="col-6">
+                    <label for="hea_100" class="form-label">100 Hz .hea:</label>
+                    <input class="form-control manual-file" type="file" name="hea_100" id="hea_100" accept=".hea">
+                  </div>
+                  <div class="col-6">
+                    <label for="dat_100" class="form-label">100 Hz .dat:</label>
+                    <input class="form-control manual-file" type="file" name="dat_100" id="dat_100" accept=".dat">
+                  </div>
+                </div>
+                <label class="form-label fw-bold mt-3 mb-2">500 Hz Recordings</label>
+                <div class="row g-2 align-items-center">
+                  <div class="col-6">
+                    <label for="hea_500" class="form-label">500 Hz .hea:</label>
+                    <input class="form-control manual-file" type="file" name="hea_500" id="hea_500" accept=".hea">
+                  </div>
+                  <div class="col-6">
+                    <label for="dat_500" class="form-label">500 Hz .dat:</label>
+                    <input class="form-control manual-file" type="file" name="dat_500" id="dat_500" accept=".dat">
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="notes" class="form-label">Description/Notes (optional):</label>
+                <textarea class="form-control" id="notes" name="notes" rows="1" placeholder="Optional info"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Predict</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-md-8 text-center text-muted">
+        <small>&copy; 2025 ECG AI Web Inference</small>
+      </div>
+    </div>
+  </div>
+  <script>updateFileFields();</script>
+</body>
+</html>

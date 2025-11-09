@@ -1,2 +1,87 @@
+# Ignore training data
+/data/
+/DATA/
+/DATA/
+/DATA/*
+/data_raw/
+/datasets/
+/raw_data/
+/downloaded/
+/*.csv
+*.tsv
+*.parquet
+*.npz
+*.npy
+*.h5
+*.hdf5
+*.db
+*.sqlite
+*.jsonl
+*.jsonl.gz
+
+# Ignore model checkpoints and weights
+
+/runs/
+/experiments/
+/output/
+/inference/
+/*.pt
+/*.pth
+/*.ckpt
+/*.bin
+/*.pb
+/*.onnx
+
+# Caches and logs
+/.cache/
+/.cache/
+/venv/
+/env/
+/logs/
+/tensorboard/
+/tb_logs/
+/hf_cache/
+/huggingface/
+.dvc/
+*.log
+
+# Keep small repo tracking files if needed
+!README.md
+
+# Large files and archives (project-specific)
+# Model directories and checkpoints (already some present above)
+
+
+# Prediction / output / temporary folders
+prediction/
+uploads/
+
+# Raw/record directories inside DATA that are large
+DATA/records*/
+
+# Ensure DATA directory (case variants) is ignored
+DATA/
+data/
+
+# Common large archive and binary formats
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# Large media/video files
+*.mp4
+*.avi
+
+# Python bytecode and caches
+__pycache__/
+*.pyc
+
+# Local virtual environments
+.venv/
+venv/
+ENV/
 
 saved_models/

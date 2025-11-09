@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prediction Result</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow">
+          <div class="card-header bg-success text-white">
+            <h3 class="mb-0">Prediction Result</h3>
+          </div>
+          <div class="card-body">
+            {% if ai_report %}
+            <div class="alert alert-warning text-dark">
+              <strong>AI Doctor's Recommendation:</strong><br>
+              <span style="white-space: pre-line">{{ ai_report|safe }}</span>
+            </div>
+            {% endif %}
+            <h5>File: <span class="text-dark">{{ filename }}</span></h5>
+            {% if freq_name %}
+                <span class="badge bg-secondary mb-2">Scanned Frequency: {{ freq_name }}</span>
+            {% endif %}
+            <hr>
+            <!-- Patient Info -->
+            <h6 class="mb-2">Patient Info:</h6>
+            <ul class="list-group list-group-flush mb-3">
+              {% if name %}<li class="list-group-item"><strong>Name:</strong> {{ name }}</li>{% endif %}
+              {% if age %}<li class="list-group-item"><strong>Age:</strong> {{ age }}</li>{% endif %}
+              {% if sex %}<li class="list-group-item"><strong>Sex:</strong> {{ sex }}</li>{% endif %}
+              {% if patient_id %}<li class="list-group-item"><strong>Patient ID:</strong> {{ patient_id }}</li>{% endif %}
+              {% if notes %}<li class="list-group-item"><strong>Description/Notes:</strong> {{ notes }}</li>{% endif %}
+            </ul>
+            <h6>Top 3 Predicted Classes:</h6>
+            <ol>
+              {% for short, long, conf in top3 %}
+              <li><strong>{{ short }}</strong> <span class="text-muted">({{ long }})</span> <span class="badge bg-info">{{ '%.1f'|format(conf * 100) }}%</span></li>
+              {% endfor %}
+            </ol>
+            <h6 class="mt-3">All Class Scores:</h6>
+            <table class="table table-sm table-bordered mt-2">
+              <thead>
+                <tr>
+                  <th>Short Code</th>
+                  <th>Full Diagnosis</th>
+                  <th>Confidence</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for short, long, conf in preds %}
+                <tr>
+                  <td>{{ short }}</td>
+                  <td>{{ long }}</td>
+                  <td>{{ '%.1f' | format(conf * 100) }}%</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <a href="/" class="btn btn-secondary mt-3">&#8592; New Prediction</a>
+            <a href="/export_pdf" class="btn btn-primary mt-3 ms-2">Download PDF Report</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
