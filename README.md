@@ -362,4 +362,66 @@ Commit 49 - 2025-11-09T10:43:47.7379159+05:30
 Commit 50 - 2025-11-09T10:43:47.9709407+05:30
 #   E C G - D e e p N e t 
  
- 
+ ## ?? Contributing
+
+Contributions are welcome! Here's how you can help:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Make your changes and add tests if applicable
+4. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+5. Push to the branch (`git push origin feature/AmazingFeature`)
+6. Open a Pull Request
+
+## ?? License
+
+This project is open source and available under the MIT License. Please ensure you have proper licenses for any ECG data you use with this system.
+
+## ?? Citation
+
+If you use this system in your research, please cite the PTB-XL dataset:
+
+```bibtex
+@article{ptb-xl2020,
+  title={PTB-XL, a large publicly available electrocardiography dataset},
+  author={Wagner, Patrick and Strodthoff, Nils and Bousseljot, R{\"u}diger and Kreiseler, Dieter and Lunze, Fatima I and Samek, Wojciech and Schaeffter, Tobias},
+  journal={Scientific Data},
+  volume={7},
+  number={1},
+  pages={154},
+  year={2020},
+  publisher={Nature Publishing Group}
+}
+```
+
+## ?? Support
+
+For issues and questions:
+
+- ?? Check the troubleshooting section above
+- ?? Review the documentation
+- ?? [Open an issue](https://github.com/AkshatMishra0/ECG-DeepNet/issues) on GitHub
+- ?? Contact the development team
+
+## ?? Acknowledgments
+
+- PTB-XL dataset for ECG data
+- PyTorch team for the deep learning framework
+- Google Drive API for cloud integration
+- Open source community for various tools and libraries
+
+---
+
+<div align="center">
+
+**?? ECG-DeepNet**
+
+*Advanced Deep Learning for ECG Classification*
+
+[![Made with Python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=flat&logo=PyTorch&logoColor=white)](https://pytorch.org/)
+[![Flask](https://img.shields.io/badge/Flask-%23000.svg?style=flat&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+
+Built with ?? for advancing ECG analysis through AI
+
+</div>
