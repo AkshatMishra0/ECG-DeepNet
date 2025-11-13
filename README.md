@@ -11,6 +11,8 @@ A comprehensive, modular ECG classification system built with PyTorch. This syst
 - **📈 Performance Metrics**: Comprehensive evaluation with F1-scores
 - **🛠️ Modular Design**: Separate files for different functionalities
 - **🚀 Easy Startup**: Single main script to access all features
+- **☁️ Google Drive Integration**: Export PDF reports directly to Google Drive
+- **📄 PDF Reports**: Generate professional clinical reports
 
 ## 📁 Project Structure
 
@@ -154,6 +156,36 @@ The system provides comprehensive evaluation:
 - **Per-class metrics**
 - **Confusion matrices**
 - **ROC curves**
+
+## ☁️ Google Drive Integration
+
+Export your ECG reports as PDFs directly to Google Drive!
+
+### Setup Google Drive
+
+1. **Follow the detailed setup guide**: See [GOOGLE_DRIVE_SETUP.md](GOOGLE_DRIVE_SETUP.md)
+2. **Quick summary**:
+   - Create a Google Cloud project
+   - Enable Google Drive API
+   - Download OAuth credentials as `credentials.json`
+   - Place `credentials.json` in the project root
+
+### Using Google Drive Export
+
+1. Run the Flask app: `python flask_app.py`
+2. Generate an ECG prediction report
+3. On the report page, click **"Upload to Google Drive"**
+4. First time: You'll be prompted to authorize the app
+5. Future uploads: One-click export to your Drive!
+
+### Features
+
+- ✅ One-click PDF upload to Google Drive
+- ✅ Secure OAuth2 authentication
+- ✅ Direct link to view uploaded reports
+- ✅ Persistent authentication (no re-login required)
+
+**Note**: The `credentials.json` file is required for Google Drive integration. See the setup guide for detailed instructions.
 
 ## 🛠️ Advanced Usage
 
@@ -328,5 +360,6 @@ Commit 47 - 2025-11-09T10:43:47.2832498+05:30
 Commit 48 - 2025-11-09T10:43:47.5153852+05:30
 Commit 49 - 2025-11-09T10:43:47.7379159+05:30
 Commit 50 - 2025-11-09T10:43:47.9709407+05:30
-#   E C G - D e e p N e t  
+#   E C G - D e e p N e t 
+ 
  

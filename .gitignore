@@ -32,6 +32,11 @@
 /*.pb
 /*.onnx
 
+# Google Drive API credentials (IMPORTANT: Never commit these!)
+credentials.json
+token.pickle
+client_secret*.json
+
 # Caches and logs
 /.cache/
 /.cache/
