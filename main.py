@@ -17,7 +17,7 @@ def print_banner():
     print()
 
 def check_requirements():
-    """Check if required packages are installed"""
+    """Check if required packages are installed""" 
     required_packages = [
         ('torch', 'torch'),
         ('numpy', 'numpy'), 
